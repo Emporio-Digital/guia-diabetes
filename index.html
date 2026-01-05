@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Download Exclusivo - Vitrine Digital</title>
+  
+  <!-- Fonte Premium -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary-color: #00ff88; /* Verde Neon */
+      --glass-bg: rgba(20, 20, 20, 0.6);
+      --text-main: #ffffff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #0a0a0a;
+      color: var(--text-main);
+      height: 100vh;
+      width: 100vw;
+      overflow: hidden; 
+      display: flex;
+    }
+
+    /* --- BACKGROUND COM REFLEXO --- */
+    body::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: linear-gradient(115deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0) 40%, rgba(255,255,255,0) 60%, rgba(255,255,255,0.02) 100%);
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    /* --- LADO ESQUERDO: FORMULÁRIO --- */
+    .section-form {
+      flex: 1; 
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 40px;
+      background: radial-gradient(circle at top left, #1a1a1a, #000);
+      box-shadow: 10px 0 30px rgba(0,0,0,0.5);
+    }
+
+    .form-wrapper {
+      max-width: 450px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    /* Isca */
+    .isca-destaque {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .isca-img {
+      width: 120px;
+      border-radius: 8px;
+      box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
+      transition: transform 0.3s;
+    }
+    .isca-img:hover { transform: scale(1.05); }
+
+    .isca-info h1 {
+      font-size: 1.8rem;
+      line-height: 1.1;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .isca-info h1 span { color: var(--primary-color); }
+    .isca-info p { font-size: 0.9rem; color: #aaa; margin-top: 5px; }
+
+    /* Inputs */
+    .input-line {
+      width: 100%;
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid #333;
+      padding: 12px 0;
+      font-size: 1rem;
+      color: white;
+      margin-bottom: 20px;
+      font-family: 'Poppins', sans-serif;
+      transition: 0.3s;
+    }
+    .input-line:focus { outline: none; border-bottom-color: var(--primary-color); }
+    .input-line::placeholder { color: #555; }
+
+    /* Checkbox */
+    .check-area {
+      display: flex;
+      gap: 10px;
+      font-size: 0.8rem;
+      color: #777;
+      margin-bottom: 25px;
+      align-items: center;
+      cursor: pointer;
+    }
+    input[type="checkbox"] { accent-color: var(--primary-color); }
+
+    /* Botão */
+    .btn-action {
+      width: 100%;
+      padding: 18px;
+      background: var(--primary-color);
+      color: #000;
+      font-weight: 700;
+      font-size: 1rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.2s;
+    }
+    .btn-action:hover { background: #00e078; box-shadow: 0 0 20px rgba(0, 255, 136, 0.4); }
+    .btn-action:disabled { background: #444; cursor: not-allowed; }
+
+    /* --- LADO DIREITO: VITRINE --- */
+    .section-vitrine {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      background: #050505;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-left: 1px solid #111;
+    }
+
+    .carousel-track {
+      width: 75%;
+      display: flex;
+      flex-direction: column;
+      gap: 40px; 
+      animation: scrollUp 40s linear infinite; 
+    }
+
+    .product-card {
+      display: block;
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.8);
+      transform: perspective(1000px) rotateY(-10deg);
+      transition: transform 0.3s, border-color 0.3s;
+      opacity: 0.85;
+      text-decoration: none;
+      border: 1px solid transparent;
+      cursor: pointer;
+    }
+
+    .product-card:hover {
+      transform: perspective(1000px) rotateY(0deg) scale(1.05);
+      opacity: 1;
+      z-index: 50;
+      border-color: var(--primary-color);
+    }
+
+    .product-card img { width: 100%; display: block; }
+
+    .product-badge {
+      position: absolute; bottom: 10px; left: 10px;
+      background: rgba(0,0,0,0.9); color: var(--primary-color);
+      padding: 6px 12px; font-size: 0.75rem; border-radius: 4px;
+      font-weight: 800; text-transform: uppercase;
+    }
+
+    @keyframes scrollUp {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-50%); }
+    }
+
+    /* --- MOBILE CORRIGIDO (CSS DEFINITIVO) --- */
+    @media (max-width: 900px) {
+      body {
+        flex-direction: column; 
+        height: auto; 
+        overflow-y: auto; /* Permite rolar a tela se o celular for pequeno */
+        overflow-x: hidden;
+      }
+      
+      /* Vitrine vai para o TOPO e fica fininha */
+      .section-vitrine {
+        order: -1; 
+        flex: none;
+        height: 160px; 
+        width: 100%;
+        background: #000;
+        border-bottom: 1px solid #222;
+        padding: 10px 0;
+        z-index: 20;
+      }
+
+      .carousel-track {
+        flex-direction: row; 
+        width: auto;
+        height: 100%;
+        animation: scrollLeft 25s linear infinite;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .product-card {
+        width: 120px; 
+        transform: none; 
+        flex-shrink: 0;
+      }
+
+      @keyframes scrollLeft {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+      }
+
+      .section-form {
+        padding: 30px 20px;
+        min-height: auto;
+        justify-content: flex-start;
+      }
+
+      .isca-destaque { flex-direction: column; text-align: center; gap: 10px; }
+      .isca-img { width: 100px; margin-bottom: 5px; }
+      .isca-info h1 { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- LADO 1: FORMULÁRIO -->
+  <section class="section-form">
+    <div class="form-wrapper">
+      
+      <div class="isca-destaque">
+        <!-- SUA ISCA -->
+        <img src="https://i.ibb.co/5XP2cDRj/a2490594-f22c-44fe-acf8-f849f15fad3e.png" alt="Ebook Grátis" class="isca-img">
+        
+        <div class="isca-info">
+          <h1>Guia<br><span>Saudável</span></h1>
+          <p>Preencha os dados abaixo para receber o PDF gratuitamente no seu e-mail.</p>
+        </div>
+      </div>
+
+      <form id="form-captura">
+        <!-- RASTREAMENTO DO NICHO -->
+        <input type="hidden" name="interest" value="guia_receitas_saudaveis">
+
+        <input type="text" name="name" class="input-line" placeholder="Nome Completo" required>
+        <input type="email" name="email" class="input-line" placeholder="Seu E-mail" required>
+        <input type="tel" name="whatsapp" class="input-line" placeholder="WhatsApp (DDD + Número)" required>
+
+        <label class="check-area">
+          <input type="checkbox" required checked>
+          <span>Concordo em receber o ebook e ofertas.</span>
+        </label>
+
+        <button type="submit" id="btn-enviar" class="btn-action">
+          RECEBER EBOOK GRÁTIS ➔
+        </button>
+      </form>
+
+    </div>
+  </section>
+
+  <!-- LADO 2: VITRINE -->
+  <section class="section-vitrine">
+    <div class="carousel-track" id="track-vitrine"></div>
+  </section>
+
+  <script>
+    // 1. CONFIGURAÇÃO DOS PRODUTOS DA VITRINE
+    const sistemaKairos = {
+      img: 'https://i.ibb.co/MDsfZH2z/Chat-GPT-Image-3-de-jan-de-2026-06-32-30.png',
+      link: 'https://kairos-agenda-inteligente.vercel.app',
+      label: '🚀 Sistema Premium'
+    };
+
+    const ebookCasamento = {
+      img: 'https://i.ibb.co/Z1T1gbC5/capa-600x600.png',
+      link: 'https://go.hotmart.com/X102588332N',
+      label: '❤️ Casamento'
+    };
+
+    const ebookAnsiedade = {
+      img: 'https://i.ibb.co/zTw81Ksr/Chat-GPT-Image-17-de-out-de-2025-15-19-30.png',
+      link: 'https://go.hotmart.com/K102552822J',
+      label: '🍃 Leveza'
+    };
+
+    const ebookNovo = {
+      img: 'https://i.ibb.co/ZRf6jSX1/Chat-GPT-Image-5-de-jan-de-2026-05-12-28.png',
+      link: 'https://go.hotmart.com/C103670666I',
+      label: '🔥 Oportunidade'
+    };
+
+    // Lista com destaque para o Sistema (3x)
+    const vitrineProdutos = [
+      sistemaKairos, ebookCasamento,
+      sistemaKairos, ebookNovo,
+      sistemaKairos, ebookAnsiedade
+    ];
+
+    function iniciarVitrine() {
+      const track = document.getElementById('track-vitrine');
+      const listaExpandida = [...vitrineProdutos, ...vitrineProdutos, ...vitrineProdutos, ...vitrineProdutos];
+
+      listaExpandida.forEach(prod => {
+        const linkEl = document.createElement('a');
+        linkEl.className = 'product-card';
+        linkEl.href = prod.link;
+        linkEl.target = "_blank"; 
+        
+        linkEl.innerHTML = `
+          <img src="${prod.img}" alt="${prod.label}" loading="lazy">
+          <div class="product-badge">${prod.label}</div>
+        `;
+        track.appendChild(linkEl);
+      });
+    }
+    iniciarVitrine();
+
+    // 2. ENVIO PARA O BACKEND
+    const FUNCTION_URL = "https://ljlqywpvscggnhhclvmk.supabase.co/functions/v1/capturar-lead";
+    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxqbHF5d3B2c2NnZ25oaGNsdm1rIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjcwNjAyNzksImV4cCI6MjA4MjYzNjI3OX0.-7KQ4y1eQWVoxz_V0SFev35-AgkRygnO4uvMXTAVQ50"; 
+
+    document.getElementById('form-captura').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const btn = document.getElementById('btn-enviar');
+      const originalText = btn.innerText;
+      
+      btn.innerText = "ENVIANDO...";
+      btn.disabled = true;
+      btn.style.opacity = "0.7";
+
+      const formData = new FormData(e.target);
+      const dados = Object.fromEntries(formData.entries());
+
+      try {
+        const response = await fetch(FUNCTION_URL, {
+          method: 'POST',
+          headers: { 
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + SUPABASE_ANON_KEY
+          },
+          body: JSON.stringify(dados)
+        });
+
+        const resultado = await response.json();
+
+        if (response.ok) {
+          btn.style.background = "#fff";
+          btn.style.color = "#000";
+          btn.innerText = "SUCESSO! ✅";
+          
+          setTimeout(() => {
+            alert("Sucesso! O Material foi enviado para seu e-mail.");
+            e.target.reset();
+            btn.innerText = originalText;
+            btn.style.background = ""; 
+            btn.style.color = "";
+            btn.disabled = false;
+          }, 800);
+        } else {
+          throw new Error(resultado.error || "Erro ao processar");
+        }
+      } catch (err) {
+        console.error(err);
+        alert("Erro: " + err.message);
+        btn.innerText = originalText;
+        btn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
