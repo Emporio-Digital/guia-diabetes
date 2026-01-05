@@ -155,7 +155,7 @@
       box-shadow: 0 15px 40px rgba(0,0,0,0.8);
       transform: perspective(1000px) rotateY(-10deg);
       transition: transform 0.3s, border-color 0.3s;
-      opacity: 1; /* Imagem 100% nítida */
+      opacity: 1; 
       text-decoration: none;
       border: 1px solid transparent;
       cursor: pointer;
@@ -174,7 +174,7 @@
       100% { transform: translateY(-50%); }
     }
 
-    /* --- MOBILE OTIMIZADO (ESTRATÉGIA NOVA) --- */
+    /* --- MOBILE OTIMIZADO --- */
     @media (max-width: 900px) {
       body {
         flex-direction: column; 
@@ -183,11 +183,11 @@
         overflow-x: hidden;
       }
       
-      /* 1. VITRINE GRANDE (Horizontal) */
+      /* Vitrine Grande no Mobile */
       .section-vitrine {
         order: -1; 
         flex: none;
-        height: 260px; /* BEM MAIOR PARA MOSTRAR DETALHES */
+        height: 260px;
         width: 100%;
         background: #000;
         border-bottom: 2px solid #222;
@@ -199,16 +199,22 @@
         flex-direction: row; 
         width: auto;
         height: 100%;
-        animation: scrollLeft 30s linear infinite; /* Um pouco mais lento pra ver melhor */
+        animation: scrollLeft 30s linear infinite;
         align-items: center;
         gap: 20px;
       }
 
       .product-card {
-        width: 170px; /* IMAGENS MAIORES NO CELULAR */
+        width: 170px; /* Tamanho padrão para Ebooks (Verticais) */
         transform: none; 
         flex-shrink: 0;
         box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+      }
+      
+      /* === TRUQUE DO DESTAQUE HORIZONTAL === */
+      /* No JS vamos adicionar essa classe para a imagem do Sistema */
+      .card-landscape {
+        width: 280px !important; /* Aumentei BEM para ficar legível */
       }
 
       @keyframes scrollLeft {
@@ -216,39 +222,26 @@
         100% { transform: translateX(-50%); }
       }
 
-      /* 2. FORMULÁRIO COMPACTO */
+      /* Formulário Compacto */
       .section-form {
-        padding: 20px 15px; /* Menos borda */
+        padding: 20px 15px;
         min-height: auto;
         justify-content: flex-start;
       }
 
       .isca-destaque { 
-        flex-direction: row; /* Mantém lado a lado pra economizar altura */
+        flex-direction: row;
         text-align: left; 
         gap: 15px;
         margin-bottom: 20px;
       }
       
-      .isca-img { 
-        width: 80px; /* Capa da isca menor pra focar no form */ 
-        margin-bottom: 0; 
-      }
-      
+      .isca-img { width: 80px; margin-bottom: 0; }
       .isca-info h1 { font-size: 1.4rem; }
       .isca-info p { font-size: 0.8rem; line-height: 1.2; }
 
-      /* Inputs mais finos */
-      .input-line {
-        padding: 8px 0;
-        margin-bottom: 15px;
-        font-size: 0.95rem;
-      }
-      
-      .btn-action {
-        padding: 15px;
-        font-size: 0.95rem;
-      }
+      .input-line { padding: 8px 0; margin-bottom: 15px; font-size: 0.95rem; }
+      .btn-action { padding: 15px; font-size: 0.95rem; }
     }
   </style>
 </head>
@@ -259,9 +252,7 @@
     <div class="form-wrapper">
       
       <div class="isca-destaque">
-        <!-- SUA ISCA -->
         <img src="https://i.ibb.co/5XP2cDRj/a2490594-f22c-44fe-acf8-f849f15fad3e.png" alt="Ebook Grátis" class="isca-img">
-        
         <div class="isca-info">
           <h1>Guia<br><span>Saudável</span></h1>
           <p>Preencha para receber o PDF no seu e-mail.</p>
@@ -269,7 +260,6 @@
       </div>
 
       <form id="form-captura">
-        <!-- RASTREAMENTO DO NICHO -->
         <input type="hidden" name="interest" value="guia_receitas_saudaveis">
 
         <input type="text" name="name" class="input-line" placeholder="Nome Completo" required>
@@ -295,29 +285,28 @@
   </section>
 
   <script>
-    // 1. CONFIGURAÇÃO DOS PRODUTOS DA VITRINE
-    // OBS: O texto (label) foi removido do código HTML abaixo, então só a imagem aparece.
+    // 1. VITRINE (Configuração dos Produtos)
+    
+    // Adicionei "isLandscape: true" para identificar que essa imagem é larga
     const sistemaKairos = {
       img: 'https://i.ibb.co/MDsfZH2z/Chat-GPT-Image-3-de-jan-de-2026-06-32-30.png',
-      link: 'https://kairos-agenda-inteligente.vercel.app'
+      link: 'https://kairos-agenda-inteligente.vercel.app',
+      isLandscape: true // SINALIZADOR DE IMAGEM HORIZONTAL
     };
 
     const ebookCasamento = {
       img: 'https://i.ibb.co/Z1T1gbC5/capa-600x600.png',
       link: 'https://go.hotmart.com/X102588332N'
     };
-
     const ebookAnsiedade = {
       img: 'https://i.ibb.co/zTw81Ksr/Chat-GPT-Image-17-de-out-de-2025-15-19-30.png',
       link: 'https://go.hotmart.com/K102552822J'
     };
-
     const ebookNovo = {
       img: 'https://i.ibb.co/ZRf6jSX1/Chat-GPT-Image-5-de-jan-de-2026-05-12-28.png',
       link: 'https://go.hotmart.com/C103670666I'
     };
 
-    // Lista com destaque para o Sistema (3x)
     const vitrineProdutos = [
       sistemaKairos, ebookCasamento,
       sistemaKairos, ebookNovo,
@@ -326,16 +315,19 @@
 
     function iniciarVitrine() {
       const track = document.getElementById('track-vitrine');
-      // Duplica a lista para rolagem infinita
       const listaExpandida = [...vitrineProdutos, ...vitrineProdutos, ...vitrineProdutos, ...vitrineProdutos];
 
       listaExpandida.forEach(prod => {
         const linkEl = document.createElement('a');
         linkEl.className = 'product-card';
+        
+        // Se for horizontal, adiciona classe especial para ficar maior no mobile
+        if (prod.isLandscape) {
+          linkEl.classList.add('card-landscape');
+        }
+
         linkEl.href = prod.link;
         linkEl.target = "_blank"; 
-        
-        // AQUI ESTÁ A LIMPEZA: Só a imagem, sem DIV de texto
         linkEl.innerHTML = `<img src="${prod.img}" alt="Oferta" loading="lazy">`;
         track.appendChild(linkEl);
       });
@@ -377,13 +369,13 @@
           btn.innerText = "SUCESSO! ✅";
           
           setTimeout(() => {
-            alert("Sucesso! Verifique seu e-mail agora.");
+            alert("✅ CADASTRO REALIZADO!\n\nO link do ebook foi enviado para seu e-mail.\n\n⚠️ IMPORTANTE: Verifique sua caixa de SPAM ou Lixo Eletrônico, pode ter caído lá!");
             e.target.reset();
             btn.innerText = originalText;
             btn.style.background = ""; 
             btn.style.color = "";
             btn.disabled = false;
-          }, 800);
+          }, 500);
         } else {
           throw new Error(resultado.error || "Erro ao processar");
         }
