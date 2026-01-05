@@ -155,7 +155,7 @@
       box-shadow: 0 15px 40px rgba(0,0,0,0.8);
       transform: perspective(1000px) rotateY(-10deg);
       transition: transform 0.3s, border-color 0.3s;
-      opacity: 0.85;
+      opacity: 1; /* Imagem 100% nítida */
       text-decoration: none;
       border: 1px solid transparent;
       cursor: pointer;
@@ -163,43 +163,35 @@
 
     .product-card:hover {
       transform: perspective(1000px) rotateY(0deg) scale(1.05);
-      opacity: 1;
       z-index: 50;
       border-color: var(--primary-color);
     }
 
     .product-card img { width: 100%; display: block; }
 
-    .product-badge {
-      position: absolute; bottom: 10px; left: 10px;
-      background: rgba(0,0,0,0.9); color: var(--primary-color);
-      padding: 6px 12px; font-size: 0.75rem; border-radius: 4px;
-      font-weight: 800; text-transform: uppercase;
-    }
-
     @keyframes scrollUp {
       0% { transform: translateY(0); }
       100% { transform: translateY(-50%); }
     }
 
-    /* --- MOBILE CORRIGIDO (CSS DEFINITIVO) --- */
+    /* --- MOBILE OTIMIZADO (ESTRATÉGIA NOVA) --- */
     @media (max-width: 900px) {
       body {
         flex-direction: column; 
         height: auto; 
-        overflow-y: auto; /* Permite rolar a tela se o celular for pequeno */
+        overflow-y: auto;
         overflow-x: hidden;
       }
       
-      /* Vitrine vai para o TOPO e fica fininha */
+      /* 1. VITRINE GRANDE (Horizontal) */
       .section-vitrine {
         order: -1; 
         flex: none;
-        height: 160px; 
+        height: 260px; /* BEM MAIOR PARA MOSTRAR DETALHES */
         width: 100%;
         background: #000;
-        border-bottom: 1px solid #222;
-        padding: 10px 0;
+        border-bottom: 2px solid #222;
+        padding: 15px 0;
         z-index: 20;
       }
 
@@ -207,15 +199,16 @@
         flex-direction: row; 
         width: auto;
         height: 100%;
-        animation: scrollLeft 25s linear infinite;
+        animation: scrollLeft 30s linear infinite; /* Um pouco mais lento pra ver melhor */
         align-items: center;
-        gap: 15px;
+        gap: 20px;
       }
 
       .product-card {
-        width: 120px; 
+        width: 170px; /* IMAGENS MAIORES NO CELULAR */
         transform: none; 
         flex-shrink: 0;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.5);
       }
 
       @keyframes scrollLeft {
@@ -223,15 +216,39 @@
         100% { transform: translateX(-50%); }
       }
 
+      /* 2. FORMULÁRIO COMPACTO */
       .section-form {
-        padding: 30px 20px;
+        padding: 20px 15px; /* Menos borda */
         min-height: auto;
         justify-content: flex-start;
       }
 
-      .isca-destaque { flex-direction: column; text-align: center; gap: 10px; }
-      .isca-img { width: 100px; margin-bottom: 5px; }
-      .isca-info h1 { font-size: 1.5rem; }
+      .isca-destaque { 
+        flex-direction: row; /* Mantém lado a lado pra economizar altura */
+        text-align: left; 
+        gap: 15px;
+        margin-bottom: 20px;
+      }
+      
+      .isca-img { 
+        width: 80px; /* Capa da isca menor pra focar no form */ 
+        margin-bottom: 0; 
+      }
+      
+      .isca-info h1 { font-size: 1.4rem; }
+      .isca-info p { font-size: 0.8rem; line-height: 1.2; }
+
+      /* Inputs mais finos */
+      .input-line {
+        padding: 8px 0;
+        margin-bottom: 15px;
+        font-size: 0.95rem;
+      }
+      
+      .btn-action {
+        padding: 15px;
+        font-size: 0.95rem;
+      }
     }
   </style>
 </head>
@@ -247,7 +264,7 @@
         
         <div class="isca-info">
           <h1>Guia<br><span>Saudável</span></h1>
-          <p>Preencha os dados abaixo para receber o PDF gratuitamente no seu e-mail.</p>
+          <p>Preencha para receber o PDF no seu e-mail.</p>
         </div>
       </div>
 
@@ -261,7 +278,7 @@
 
         <label class="check-area">
           <input type="checkbox" required checked>
-          <span>Concordo em receber o ebook e ofertas.</span>
+          <span>Concordo em receber o material.</span>
         </label>
 
         <button type="submit" id="btn-enviar" class="btn-action">
@@ -279,28 +296,25 @@
 
   <script>
     // 1. CONFIGURAÇÃO DOS PRODUTOS DA VITRINE
+    // OBS: O texto (label) foi removido do código HTML abaixo, então só a imagem aparece.
     const sistemaKairos = {
       img: 'https://i.ibb.co/MDsfZH2z/Chat-GPT-Image-3-de-jan-de-2026-06-32-30.png',
-      link: 'https://kairos-agenda-inteligente.vercel.app',
-      label: '🚀 Sistema Premium'
+      link: 'https://kairos-agenda-inteligente.vercel.app'
     };
 
     const ebookCasamento = {
       img: 'https://i.ibb.co/Z1T1gbC5/capa-600x600.png',
-      link: 'https://go.hotmart.com/X102588332N',
-      label: '❤️ Casamento'
+      link: 'https://go.hotmart.com/X102588332N'
     };
 
     const ebookAnsiedade = {
       img: 'https://i.ibb.co/zTw81Ksr/Chat-GPT-Image-17-de-out-de-2025-15-19-30.png',
-      link: 'https://go.hotmart.com/K102552822J',
-      label: '🍃 Leveza'
+      link: 'https://go.hotmart.com/K102552822J'
     };
 
     const ebookNovo = {
       img: 'https://i.ibb.co/ZRf6jSX1/Chat-GPT-Image-5-de-jan-de-2026-05-12-28.png',
-      link: 'https://go.hotmart.com/C103670666I',
-      label: '🔥 Oportunidade'
+      link: 'https://go.hotmart.com/C103670666I'
     };
 
     // Lista com destaque para o Sistema (3x)
@@ -312,6 +326,7 @@
 
     function iniciarVitrine() {
       const track = document.getElementById('track-vitrine');
+      // Duplica a lista para rolagem infinita
       const listaExpandida = [...vitrineProdutos, ...vitrineProdutos, ...vitrineProdutos, ...vitrineProdutos];
 
       listaExpandida.forEach(prod => {
@@ -320,10 +335,8 @@
         linkEl.href = prod.link;
         linkEl.target = "_blank"; 
         
-        linkEl.innerHTML = `
-          <img src="${prod.img}" alt="${prod.label}" loading="lazy">
-          <div class="product-badge">${prod.label}</div>
-        `;
+        // AQUI ESTÁ A LIMPEZA: Só a imagem, sem DIV de texto
+        linkEl.innerHTML = `<img src="${prod.img}" alt="Oferta" loading="lazy">`;
         track.appendChild(linkEl);
       });
     }
@@ -364,7 +377,7 @@
           btn.innerText = "SUCESSO! ✅";
           
           setTimeout(() => {
-            alert("Sucesso! O Material foi enviado para seu e-mail.");
+            alert("Sucesso! Verifique seu e-mail agora.");
             e.target.reset();
             btn.innerText = originalText;
             btn.style.background = ""; 
