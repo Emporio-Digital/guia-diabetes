@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Oferta Especial - Combo Vida Equilibrada</title>
+  
+  <!-- Fonte Elegante -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary-color: #0f172a; 
+      --accent-color: #0d9488;  
+      --bg-light: #f8fafc;      
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg-light);
+      color: var(--text-main);
+      line-height: 1.5;
+    }
+
+    /* NOTIFICAÇÃO DE TOPO */
+    .top-bar {
+      background: #f0fdf4;
+      border-bottom: 1px solid #bbf7d0;
+      color: #166534;
+      text-align: center;
+      padding: 10px 15px;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    /* CONTAINER PRINCIPAL */
+    .sales-container {
+      max-width: 650px; /* Mais estreito para facilitar a leitura */
+      margin: 0 auto;
+      padding: 40px 15px;
+      text-align: center;
+    }
+
+    .headline {
+      font-size: 2rem;
+      font-weight: 800;
+      line-height: 1.2;
+      color: var(--primary-color);
+      margin-bottom: 15px;
+    }
+
+    .headline span {
+      color: var(--accent-color);
+    }
+
+    .sub-headline {
+      font-size: 1rem;
+      color: var(--text-muted);
+      margin-bottom: 30px;
+    }
+
+    /* CARD DO COMBO */
+    .combo-box {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 20px;
+      padding: 30px 20px;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.03);
+      margin-bottom: 30px;
+    }
+
+    .combo-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      margin-bottom: 25px;
+    }
+
+    /* Imagens lado a lado */
+    .books-display {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    /* Mantém as suas fotos que já estão funcionando */
+    .book-cover {
+      width: 110px;
+      border-radius: 6px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+
+    .plus-sign {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--text-muted);
+    }
+
+    /* Lista ultra direta */
+    .features-list {
+      text-align: left;
+      max-width: 450px;
+      margin: 0 auto 25px auto;
+      list-style: none;
+    }
+
+    .features-list li {
+      font-size: 0.95rem;
+      color: var(--text-main);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .features-list li span {
+      color: var(--accent-color);
+      font-weight: bold;
+    }
+
+    /* PRECIFICAÇÃO E BOTÃO */
+    .price-area {
+      margin-bottom: 20px;
+    }
+
+    .price-old {
+      font-size: 0.85rem;
+      text-decoration: line-through;
+      color: var(--text-muted);
+    }
+
+    .price-new {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--primary-color);
+    }
+
+    .price-installments {
+      font-size: 0.9rem;
+      color: var(--accent-color);
+      font-weight: 600;
+    }
+
+    .btn-buy {
+      display: inline-block;
+      width: 100%;
+      max-width: 400px;
+      padding: 16px 24px;
+      background: #00e078; 
+      color: #ffffff;
+      font-weight: 800;
+      font-size: 1rem;
+      text-decoration: none;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 224, 120, 0.25);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: all 0.2s;
+    }
+
+    .btn-buy:hover {
+      background: #00c066;
+      transform: translateY(-1px);
+    }
+
+    /* GARANTIA SIMPLES */
+    .guarantee-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 25px;
+      text-align: left;
+      max-width: 380px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .guarantee-icon {
+      font-size: 1.8rem;
+    }
+
+    .guarantee-text p {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      line-height: 1.3;
+    }
+
+    /* RESPONSIVIDADE */
+    @media (max-width: 480px) {
+      .headline {
+        font-size: 1.6rem;
+      }
+      .book-cover {
+        width: 95px;
+      }
+    }
+    .combo-title span {
+    display: block;
+    margin-top: 5px; /* Pequeno espaçamento opcional entre as linhas */
+  }
+}
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">
+    ✓ Seu Guia do Sono Grátis foi enviado para o seu e-mail!
+  </div>
+
+  <main class="sales-container">
+    
+    <h1 class="headline">Sua insônia é apenas um sintoma. <br><span>Resolva a real causa agora.</span></h1>
+    
+    <p class="sub-headline">
+      Tratar apenas o sono é como enxugar gelo. Mentes aceleradas à noite são alimentadas por dois grandes vilões: a <strong>ansiedade acumulada</strong> e as <strong>preocupações financeiras</strong>.
+    </p>
+
+    <!-- CARD DO COMBO -->
+    <section class="combo-box">
+      <h2 class="combo-title">Leve o Combo Completo <span>(Mente & Bolso)</span></h2>
+      
+      <div class="books-display">
+        <!-- Mantive os caminhos que você já configurou e que deram certo no seu print -->
+        <img src="https://i.ibb.co/6056ND4d/ebook1.png" alt="Ebook Ansiedade" class="book-cover">
+        
+        <span class="plus-sign">+</span>
+        
+        <img src="https://i.ibb.co/ZRf6jSX1/Chat-GPT-Image-5-de-jan-de-2026-05-12-28.png" alt="Ebook Finanças" class="book-cover">
+      </div>
+
+      <ul class="features-list">
+        <li><span>✓</span> <strong>Viver com Mais Leveza:</strong> Ferramentas práticas para acalmar a mente e reduzir o estresse diário.</li>
+        <li><span>✓</span> <strong>Saúde Financeira:</strong> Guia simples para organizar o orçamento e fazer o dinheiro sobrar.</li>
+        <li><span>✓</span> <strong>Acesso Imediato & Vitalício:</strong> Leia no celular ou computador quando quiser.</li>
+      </ul>
+
+      <div class="price-area">
+        <span class="price-old">De R$ 59,90 por apenas:</span>
+        <div class="price-new">R$ 29,90</div>
+        <div class="price-installments">Pagamento único • Sem assinaturas</div>
+      </div>
+
+      <!-- Lembre de substituir o link abaixo pelo seu link de checkout da Hotmart -->
+      <a href="https://pay.hotmart.com/P107132117H?bid=1786561846259" target="_blank" class="btn-buy">
+        QUERO O COMBO COMPLETO ➔
+      </a>
+
+      <!-- GARANTIA DIRETA -->
+      <div class="guarantee-box">
+        <span class="guarantee-icon">🛡️</span>
+        <div class="guarantee-text">
+          <p><strong>Garantia de 7 dias:</strong></p>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+</body>
+</html>

@@ -1,5 +1,5 @@
 import { createClient } from 'jsr:@supabase/supabase-js@2'
-import nodemailer from "npm:nodemailer@6.9.13";
+import { Resend } from "npm:resend@3.2.0";
 
 // --- LINKS AJUSTADOS PARA O NOVO REPOSITÓRIO (pag-leads) ---
 const PRODUTOS_CONFIG = {
@@ -57,22 +57,16 @@ Deno.serve(async (req) => {
     // 2. Seleciona as configurações com base no interesse
     const configAtual = PRODUTOS_CONFIG[interest] || PRODUTOS_CONFIG['padrao']
 
-    // 3. Envia Email via Gmail
-    const gmailUser = Deno.env.get('GMAIL_USER')
-    const gmailPass = Deno.env.get('GMAIL_PASS')
+    // 3. Envia Email via Resend
+    const resendApiKey = Deno.env.get('RESEND_API_KEY')
+    
+    if (resendApiKey) {
+      const resend = new Resend(resendApiKey);
 
-    if (gmailUser && gmailPass) {
-      
-      const transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: { user: gmailUser, pass: gmailPass },
-      });
-
-      await transporter.sendMail({
-        from: `"Empório Digital" <${gmailUser}>`,
-        to: email,
+      await resend.emails.send({
+        from: 'Empório Digital <contato@egemporiodigital.com.br>',
+        to: [email],
         subject: configAtual.assunto,
-        text: `Olá ${name}, seu guia chegou. Acesse para baixar: ${configAtual.linkDownload}`, 
         html: `
           <div style="font-family: Arial, sans-serif; color: #333; max-width: 600px; margin: 0 auto; border: 1px solid #eee; padding: 25px; border-radius: 12px; background-color: #ffffff;">
             <p style="font-size: 16px;">Olá, <strong>${name}</strong>!</p>
@@ -93,7 +87,9 @@ Deno.serve(async (req) => {
         `,
       });
       
-      console.log(`Email enviado com sucesso para ${email}!`)
+      console.log(`E-mail enviado via Resend para ${email}!`)
+    } else {
+      console.warn("Chave RESEND_API_KEY não configurada no Supabase.")
     }
 
     return new Response(JSON.stringify({ message: "Sucesso" }), {
