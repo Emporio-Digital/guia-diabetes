@@ -64,7 +64,7 @@ Deno.serve(async (req) => {
       const resend = new Resend(resendApiKey);
 
       await resend.emails.send({
-        from: 'Empório Digital <contato@egemporiodigital.com.br>',
+        from: 'EG Empório Digital <contato@egemporiodigital.com.br>',
         to: [email],
         subject: configAtual.assunto,
         html: `
