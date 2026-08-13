@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Download Gratuito</title>
+  <link rel="icon" type="image/png" href="logo.png">
   
   <!-- Fonte Elegante -->
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -31,7 +32,7 @@
     .hero-container {
       max-width: 1100px;
       margin: 0 auto;
-      padding: 60px 20px;
+      padding: 10px 20px 60px 20px;
       display: grid;
       grid-template-columns: 1.2fr 1fr;
       gap: 60px;
@@ -253,7 +254,7 @@
     @media (max-width: 900px) {
       .hero-container {
         grid-template-columns: 1fr;
-        padding: 40px 16px;
+        padding: 10px 16px 40px 16px;
         gap: 30px;
       }
 
@@ -270,10 +271,43 @@
         gap: 20px;
       }
     }
+    /* --- CABEÇALHO DA MARCA --- */
+    .brand-header {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 15px 20px 0 20px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+    .brand-logo {
+      height: 68px; /* Aumentado o tamanho de 28px para 38px */
+      width: auto;
+    }
+
+    .brand-name {
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--primary-color);
+      letter-spacing: -0.5px;
+    }
+
+    /* Ajuste para mobile */
+    @media (max-width: 900px) {
+      .brand-header {
+        padding: 20px 16px 0 16px;
+      }
+    }
   </style>
 </head>
 <body>
 
+  <!-- CABEÇALHO COM LOGO -->
+  <header class="brand-header">
+    <img src="logo.png" alt="Logo Emporio Digital" class="brand-logo">
+    <span class="brand-name">Emporio Digital</span>
+  </header>
   <!-- HERO SECTION PRINCIPAL -->
   <main class="hero-container">
     
@@ -285,7 +319,7 @@
       
       <div class="mockup-area">
         <!-- Substitua este src pela foto correta do seu livro de SONO -->
-        <img src="https://i.ibb.co/hRrs7XV4/Chat-GPT-Image-12-de-ago-de-2026-15-15-22.png" alt="Capa do E-book" class="book-cover">
+        <img src="capa-sono.png" alt="Capa do E-book" class="book-cover">
         <div class="book-meta">
           <h3>Guia Prático: Durma melhor, Viva melhor</h3>
           <p>Arquivo PDF • 100% Gratuito • Envio Imediato</p>
@@ -312,8 +346,8 @@
         </div>
 
         <div class="input-group">
-          <label class="input-label">WhatsApp</label>
-          <input type="tel" name="whatsapp" class="input-field" placeholder="(00) 99999-9999" required>
+          <label class="input-label">WhatsApp (DDD + 9 dígitos)</label>
+          <input type="tel" name="whatsapp" class="input-field" placeholder="Ex: 11999998888 (apenas números)" pattern="[0-9]{11}" minlength="11" maxlength="11" title="Insira o DDD + número de 9 dígitos (total de 11 números, sem espaços ou traços)" required>
         </div>
 
         <label class="check-area">

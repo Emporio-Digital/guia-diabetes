@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Oferta Especial - Combo Vida Equilibrada</title>
+  <link rel="icon" type="image/png" href="logo.png">
   
   <!-- Fonte Elegante -->
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -41,7 +42,7 @@
     .sales-container {
       max-width: 650px; /* Mais estreito para facilitar a leitura */
       margin: 0 auto;
-      padding: 40px 15px;
+      padding: 10px 15px 40px 15px; /* Reduzido o topo de 40px para 10px */
       text-align: center;
     }
 
@@ -126,25 +127,39 @@
 
     /* PRECIFICAÇÃO E BOTÃO */
     .price-area {
-      margin-bottom: 20px;
+      margin: 25px auto;
+      max-width: 320px;
+      background: #f8fafc; /* Fundo cinza suave para destacar a oferta */
+      padding: 15px;
+      border-radius: 12px;
+      border: 1px dashed #cbd5e1; /* Borda tracejada discreta */
     }
 
     .price-old {
-      font-size: 0.85rem;
-      text-decoration: line-through;
+      font-size: 0.95rem;
       color: var(--text-muted);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .price-old .strike {
+      text-decoration: line-through;
+      color: #ef4444; /* Riscado em vermelho para destacar a redução de preço */
+      font-weight: 600;
     }
 
     .price-new {
-      font-size: 2rem;
+      font-size: 2.6rem; /* Valor de destaque aumentado */
       font-weight: 800;
       color: var(--primary-color);
+      line-height: 1.1;
+      margin-bottom: 6px;
     }
 
     .price-installments {
       font-size: 0.9rem;
       color: var(--accent-color);
-      font-weight: 600;
+      font-weight: 700;
     }
 
     .btn-buy {
@@ -202,10 +217,38 @@
       }
     }
     .combo-title span {
-    display: block;
-    margin-top: 5px; /* Pequeno espaçamento opcional entre as linhas */
-  }
-}
+      display: block;
+      margin-top: 5px; /* Pequeno espaçamento opcional entre as linhas */
+    }
+
+    /* --- CABEÇALHO DA MARCA --- */
+    .brand-header {
+      max-width: 650px; /* Alinhado com os 650px da página de vendas */
+      margin: 0 auto;
+      padding: 15px 15px 0 15px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .brand-logo {
+      height: 68px;
+      width: auto;
+    }
+
+    .brand-name {
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--primary-color);
+      letter-spacing: -0.5px;
+    }
+
+    /* Ajuste para mobile */
+    @media (max-width: 480px) {
+      .brand-header {
+        padding: 15px 15px 0 15px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -213,6 +256,12 @@
   <div class="top-bar">
     ✓ Seu Guia do Sono Grátis foi enviado para o seu e-mail!
   </div>
+
+  <!-- CABEÇALHO COM LOGO -->
+  <header class="brand-header">
+    <img src="logo.png" alt="Logo Emporio Digital" class="brand-logo">
+    <span class="brand-name">Emporio Digital</span>
+  </header>
 
   <main class="sales-container">
     
@@ -228,11 +277,11 @@
       
       <div class="books-display">
         <!-- Mantive os caminhos que você já configurou e que deram certo no seu print -->
-        <img src="https://i.ibb.co/6056ND4d/ebook1.png" alt="Ebook Ansiedade" class="book-cover">
+        <img src="capa-ansiedade.png" alt="Ebook Ansiedade" class="book-cover">
         
         <span class="plus-sign">+</span>
         
-        <img src="https://i.ibb.co/ZRf6jSX1/Chat-GPT-Image-5-de-jan-de-2026-05-12-28.png" alt="Ebook Finanças" class="book-cover">
+        <img src="capa-financas.png" alt="Ebook Finanças" class="book-cover">
       </div>
 
       <ul class="features-list">
@@ -242,9 +291,9 @@
       </ul>
 
       <div class="price-area">
-        <span class="price-old">De R$ 59,90 por apenas:</span>
+        <span class="price-old">De <span class="strike">R$ 59,90</span> por apenas:</span>
         <div class="price-new">R$ 29,90</div>
-        <div class="price-installments">Pagamento único • Sem assinaturas</div>
+        <div class="price-installments">⚡ Pagamento único • Sem assinaturas</div>
       </div>
 
       <!-- Lembre de substituir o link abaixo pelo seu link de checkout da Hotmart -->
