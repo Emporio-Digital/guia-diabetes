@@ -16,6 +16,7 @@
       --bg-light: #f3f7fa;      /* Cinza-azulado muito suave */
       --text-main: #1e293b;
       --text-muted: #64748b;
+      --success-green: #10b981;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -28,7 +29,7 @@
       position: relative;
     }
 
-    /* Brilho suave e indireto de fundo (Efeito Noite/Calmaria) */
+    /* Brilho suave e indireto de fundo */
     body::before {
       content: '';
       position: absolute;
@@ -52,43 +53,50 @@
       font-size: 0.85rem;
       font-weight: 600;
       letter-spacing: 0.2px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.02);
     }
 
     /* CONTAINER PRINCIPAL */
     .sales-container {
-      max-width: 650px; /* Mais estreito para facilitar a leitura */
+      max-width: 650px;
       margin: 0 auto;
-      padding: 10px 15px 40px 15px; /* Reduzido o topo de 40px para 10px */
+      padding: 10px 15px 40px 15px;
       text-align: center;
     }
 
     .headline {
-      font-size: 2rem;
+      font-size: 2.1rem;
       font-weight: 800;
       line-height: 1.2;
       color: var(--primary-color);
       margin-bottom: 15px;
+      letter-spacing: -0.5px;
     }
 
     .headline span {
       color: var(--accent-color);
+      background: linear-gradient(120deg, transparent 0%, rgba(13, 148, 136, 0.08) 100%);
+      padding: 0 5px;
+      border-radius: 4px;
     }
 
     .sub-headline {
-      font-size: 1rem;
+      font-size: 1.05rem;
       color: var(--text-muted);
-      margin-bottom: 30px;
+      margin-bottom: 35px;
+      padding: 0 10px;
     }
 
-    /* CARD DO COMBO */
+    /* CARD DO COMBO - UPGRADE PREMIUM */
     .combo-box {
       background: #ffffff;
-      border: 1px solid rgba(13, 148, 136, 0.05);
+      border: 1px solid rgba(13, 148, 136, 0.1);
       border-radius: 24px;
-      padding: 35px 20px;
-      box-shadow: 0 25px 50px rgba(11, 19, 41, 0.04), 0 0 40px rgba(13, 148, 136, 0.02);
+      padding: 40px 25px;
+      box-shadow: 0 25px 50px rgba(11, 19, 41, 0.06), 0 0 0 4px rgba(255,255,255,0.5);
       margin-bottom: 30px;
       position: relative;
+      overflow: hidden;
     }
 
     /* Fio de luz superior no cartão de vendas */
@@ -96,171 +104,294 @@
       content: '';
       position: absolute;
       top: 0;
-      left: 15%;
-      right: 15%;
-      height: 3px;
-      background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
-      border-radius: 0 0 100px 100px;
-      opacity: 0.8;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent-color), #2dd4bf, var(--accent-color));
     }
 
     .combo-title {
-      font-size: 1.2rem;
-      font-weight: 700;
+      font-size: 1.3rem;
+      font-weight: 800;
       color: var(--primary-color);
-      margin-bottom: 25px;
+      margin-bottom: 30px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
-    /* Imagens lado a lado */
+    .combo-title span {
+      display: block;
+      margin-top: 5px;
+      font-size: 1rem;
+      color: var(--accent-color);
+      font-weight: 600;
+      text-transform: none;
+    }
+
+    /* Imagens lado a lado com Glow Premium */
     .books-display {
       display: flex;
       justify-content: center;
       align-items: center;
       gap: 15px;
-      margin-bottom: 25px;
+      margin-bottom: 35px;
+      position: relative;
+    }
+    
+    /* Brilho atrás dos livros */
+    .books-display::before {
+      content: '';
+      position: absolute;
+      width: 250px;
+      height: 150px;
+      background: var(--accent-color);
+      filter: blur(50px);
+      opacity: 0.15;
+      z-index: 0;
+      border-radius: 50%;
     }
 
-    /* Mantém as suas fotos que já estão funcionando */
     .book-cover {
-      width: 110px;
+      width: 115px;
       border-radius: 8px;
-      box-shadow: 0 12px 28px rgba(11, 19, 41, 0.15);
-      transition: transform 0.3s ease;
+      box-shadow: 0 15px 35px rgba(11, 19, 41, 0.2);
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      z-index: 1;
     }
 
     .book-cover:hover {
-      transform: translateY(-3px) rotate(1deg);
+      transform: translateY(-5px) scale(1.03) rotate(2deg);
     }
 
     .plus-sign {
-      font-size: 1.5rem;
+      font-size: 2rem;
       font-weight: 800;
-      color: var(--text-muted);
+      color: var(--accent-color);
+      z-index: 1;
+      text-shadow: 0 4px 10px rgba(13, 148, 136, 0.2);
     }
 
-    /* Lista ultra direta */
+    /* Lista Ultra Direta com Bullets Customizados */
     .features-list {
       text-align: left;
       max-width: 450px;
-      margin: 0 auto 25px auto;
+      margin: 0 auto 30px auto;
       list-style: none;
+      background: #f8fafc;
+      padding: 20px;
+      border-radius: 16px;
+      border: 1px solid #e2e8f0;
     }
 
     .features-list li {
       font-size: 0.95rem;
       color: var(--text-main);
-      margin-bottom: 12px;
+      margin-bottom: 15px;
       display: flex;
       align-items: flex-start;
-      gap: 10px;
+      gap: 12px;
+    }
+    
+    .features-list li:last-child {
+      margin-bottom: 0;
     }
 
-    .features-list li span {
+    .feature-icon {
+      background: rgba(13, 148, 136, 0.1);
       color: var(--accent-color);
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
       font-weight: bold;
-      filter: drop-shadow(0 2px 4px rgba(13, 148, 136, 0.15));
+      flex-shrink: 0;
+      margin-top: 2px;
     }
 
-    /* PRECIFICAÇÃO E BOTÃO */
+    /* PRECIFICAÇÃO COM GATILHO DE OFERTA */
     .price-area {
-      margin: 25px auto;
-      max-width: 320px;
-      background: #f8fafc; /* Fundo cinza suave para destacar a oferta */
-      padding: 18px;
-      border-radius: 16px;
-      border: 1px dashed rgba(13, 148, 136, 0.2); /* Borda tracejada suave com leve matiz verde-água */
+      margin: 0 auto 20px auto;
+      max-width: 350px;
+      position: relative;
+    }
+
+    .discount-tag {
+      position: absolute;
+      top: -15px;
+      right: 20px;
+      background: #ef4444;
+      color: white;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 100px;
+      box-shadow: 0 4px 10px rgba(239, 68, 68, 0.3);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transform: rotate(3deg);
     }
 
     .price-old {
-      font-size: 0.95rem;
+      font-size: 1rem;
       color: var(--text-muted);
       display: block;
-      margin-bottom: 4px;
+      margin-bottom: 2px;
     }
 
     .price-old .strike {
       text-decoration: line-through;
-      color: #ef4444; /* Riscado em vermelho para destacar a redução de preço */
+      color: #ef4444;
       font-weight: 600;
     }
 
     .price-new {
-      font-size: 2.6rem; /* Valor de destaque aumentado */
+      font-size: 3rem;
       font-weight: 800;
       color: var(--primary-color);
-      line-height: 1.1;
-      margin-bottom: 6px;
+      line-height: 1;
+      margin-bottom: 8px;
+      letter-spacing: -1px;
     }
 
     .price-installments {
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       color: var(--accent-color);
       font-weight: 700;
+      background: rgba(13, 148, 136, 0.08);
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 100px;
     }
 
+    /* BOTÃO PULSANTE (CRO) */
     .btn-buy {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       width: 100%;
       max-width: 400px;
-      padding: 16px 24px;
-      background: linear-gradient(135deg, #10b981 0%, #059669 100%); 
+      padding: 18px 24px;
+      background: linear-gradient(135deg, var(--success-green) 0%, #059669 100%); 
       color: #ffffff;
       font-weight: 800;
-      font-size: 1rem;
+      font-size: 1.1rem;
       text-decoration: none;
       border-radius: 12px;
-      box-shadow: 0 8px 20px rgba(16, 185, 129, 0.25);
+      box-shadow: 0 8px 25px rgba(16, 185, 129, 0.35);
       text-transform: uppercase;
       letter-spacing: 0.5px;
       transition: all 0.3s ease;
+      animation: pulse 2s infinite;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Efeito de luz passando no botão */
+    .btn-buy::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transform: skewX(-20deg);
+      transition: all 0.5s ease;
+    }
+
+    .btn-buy:hover::after {
+      left: 150%;
+      transition: all 0.7s ease;
     }
 
     .btn-buy:hover {
-      background: linear-gradient(135deg, #059669 0%, #047857 100%);
       transform: translateY(-2px);
-      box-shadow: 0 12px 25px rgba(16, 185, 129, 0.35);
+      box-shadow: 0 12px 30px rgba(16, 185, 129, 0.45);
+      animation: none; /* Pausa a animação quando o mouse passa */
     }
 
-    /* GARANTIA SIMPLES */
+    @keyframes pulse {
+      0% { transform: scale(1); box-shadow: 0 8px 25px rgba(16, 185, 129, 0.35); }
+      50% { transform: scale(1.03); box-shadow: 0 12px 35px rgba(16, 185, 129, 0.5); }
+      100% { transform: scale(1); box-shadow: 0 8px 25px rgba(16, 185, 129, 0.35); }
+    }
+
+    /* TEXTO SEGURO (Matador de Objeções) */
+    .secure-checkout {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 12px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+    .secure-icon {
+      color: #f59e0b; /* Amarelo ouro para o cadeado */
+      font-size: 0.9rem;
+    }
+
+    /* GARANTIA OFICIAL */
     .guarantee-box {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
-      margin-top: 25px;
+      gap: 15px;
+      margin-top: 35px;
       text-align: left;
-      max-width: 380px;
+      max-width: 400px;
       margin-left: auto;
       margin-right: auto;
+      background: #f0fdf4; /* Fundo verdinho suave */
+      border: 1px dashed #86efac;
+      padding: 15px 20px;
+      border-radius: 12px;
     }
 
     .guarantee-icon {
-      font-size: 1.8rem;
+      font-size: 2.2rem;
+      filter: drop-shadow(0 2px 4px rgba(21, 128, 61, 0.2));
     }
 
     .guarantee-text p {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      line-height: 1.3;
+      font-size: 0.8rem;
+      color: #166534;
+      line-height: 1.4;
+    }
+    .guarantee-text strong {
+      font-size: 0.95rem;
+      color: #14532d;
+      display: block;
+      margin-bottom: 2px;
     }
 
     /* RESPONSIVIDADE */
     @media (max-width: 480px) {
       .headline {
-        font-size: 1.6rem;
+        font-size: 1.7rem;
       }
       .book-cover {
-        width: 95px;
+        width: 100px;
       }
-    }
-    .combo-title span {
-      display: block;
-      margin-top: 5px; /* Pequeno espaçamento opcional entre as linhas */
+      .combo-box {
+        padding: 30px 15px;
+      }
+      .price-new {
+        font-size: 2.5rem;
+      }
+      .discount-tag {
+        right: 0;
+      }
     }
 
     /* --- CABEÇALHO DA MARCA --- */
     .brand-header {
-      max-width: 650px; /* Alinhado com os 650px da página de vendas */
+      max-width: 650px;
       margin: 0 auto;
       padding: 15px 15px 0 15px;
       display: flex;
@@ -280,14 +411,14 @@
       letter-spacing: -0.5px;
     }
 
-    /* Ajuste para mobile */
     @media (max-width: 480px) {
       .brand-header {
         padding: 15px 15px 0 15px;
       }
     }
   </style>
-  <!-- Meta Pixel Code -->
+  
+  <!-- Meta Pixel Code (INTACTO) -->
 <script>
 !function(f,b,e,v,n,t,s)
 {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -305,7 +436,7 @@ src="https://www.facebook.com/tr?id=2420947868418602&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
 
-<!-- Google tag (gtag.js) -->
+<!-- Google tag (gtag.js) (INTACTO) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-WVVLD4H2KF"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -318,7 +449,7 @@ src="https://www.facebook.com/tr?id=2420947868418602&ev=PageView&noscript=1"
 <body>
 
   <div class="top-bar">
-    ✓ Seu Guia do Sono Grátis foi enviado para o seu e-mail! (verificar o spam)
+    ✓ Seu Guia do Sono Grátis foi enviado para o seu e-mail! (verifique o spam)
   </div>
 
   <!-- CABEÇALHO COM LOGO -->
@@ -337,39 +468,43 @@ src="https://www.facebook.com/tr?id=2420947868418602&ev=PageView&noscript=1"
 
     <!-- CARD DO COMBO -->
     <section class="combo-box">
-      <h2 class="combo-title">Leve o Combo Completo <span>(Mente & Bolso)</span></h2>
+      <h2 class="combo-title">Leve o Combo Completo <span>(Vida em Equilíbrio)</span></h2>
       
       <div class="books-display">
-        <!-- Mantive os caminhos que você já configurou e que deram certo no seu print -->
         <img src="capa-ansiedade.png" alt="Ebook Ansiedade" class="book-cover">
-        
         <span class="plus-sign">+</span>
-        
         <img src="capa-financas.png" alt="Ebook Finanças" class="book-cover">
       </div>
 
       <ul class="features-list">
-        <li><span>✓</span> <strong>Viver com Mais Leveza:</strong> Ferramentas práticas para acalmar a mente e reduzir o estresse diário.</li>
-        <li><span>✓</span> <strong>Saúde Financeira:</strong> Guia simples para organizar o orçamento e fazer o dinheiro sobrar.</li>
-        <li><span>✓</span> <strong>Acesso Imediato & Vitalício:</strong> Leia no celular ou computador quando quiser.</li>
+        <li><span class="feature-icon">✓</span> <div><strong>Viver com Mais Leveza:</strong> Ferramentas práticas para acalmar a mente e reduzir o estresse diário.</div></li>
+        <li><span class="feature-icon">✓</span> <div><strong>Saúde Financeira:</strong> Guia simples para organizar o orçamento e fazer o dinheiro sobrar.</div></li>
+        <li><span class="feature-icon">✓</span> <div><strong>Acesso Imediato & Vitalício:</strong> Leia no celular, tablet ou computador quando quiser.</div></li>
       </ul>
 
       <div class="price-area">
+        <div class="discount-tag">-50% OFF HOJE</div>
         <span class="price-old">De <span class="strike">R$ 59,90</span> por apenas:</span>
         <div class="price-new">R$ 29,90</div>
         <div class="price-installments">⚡ Pagamento único • Sem assinaturas</div>
       </div>
 
-      <!-- Lembre de substituir o link abaixo pelo seu link de checkout da Hotmart -->
+      <!-- LINK HOTMART (INTACTO) -->
       <a href="https://pay.hotmart.com/P107132117H?bid=1786561846259" target="_blank" class="btn-buy">
         QUERO O COMBO COMPLETO ➔
       </a>
+      
+      <!-- GATILHO DE SEGURANÇA NO CLIQUE -->
+      <div class="secure-checkout">
+        <span class="secure-icon">🔒</span> Pagamento 100% Seguro via Hotmart
+      </div>
 
-      <!-- GARANTIA DIRETA -->
+      <!-- GARANTIA DIRETA (NOVO VISUAL OFICIAL) -->
       <div class="guarantee-box">
         <span class="guarantee-icon">🛡️</span>
         <div class="guarantee-text">
-          <p><strong>Garantia de 7 dias</strong></p>
+          <strong>Garantia Incondicional de 7 Dias</strong>
+          <p>Se você não gostar do material, devolvemos 100% do seu dinheiro. Risco zero para você.</p>
         </div>
       </div>
 
